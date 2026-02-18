@@ -1,9 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "encore.moe API",
-    "description": "API documentation for encore.moe.",
-    "version": "2.0"
+    "title": "encore.moe API v2",
+    "description": "\n# encore.moe API\n\nThis is the API documentation for api-v2.encore.moe. The API provides data for Wuthering Waves including characters, weapons, items, echoes, and more.\n\n## Usage\nMost endpoints require a `{lang}` parameter (e.g. `en`, `ja`).\n\n## Resources\n* [Website](https://encore.moe)\n* [GitHub](https://github.com/alt3ri)\n",
+    "version": "2.0.0",
+    "contact": {
+      "name": "encore.moe's developer",
+      "url": "https://alteri.moe"
+    }
   },
   "servers": [
     {
@@ -12,7 +16,85 @@
     },
     {
       "url": "https://api.encore.moe",
-      "description": "Secondary API server (legacy backend, no /api prefix)"
+      "description": "Secondary API server (legacy backend)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Core",
+      "description": "Core API endpoints."
+    },
+    {
+      "name": "Exploration Reports",
+      "description": "Operations related to [Exploration Reports]."
+    },
+    {
+      "name": "Characters",
+      "description": "Operations related to [Characters]."
+    },
+    {
+      "name": "Doubled Pawns Matrix",
+      "description": "Operations related to [Doubled Pawns Matrix]."
+    },
+    {
+      "name": "Echoes",
+      "description": "Operations related to [Echoes]."
+    },
+    {
+      "name": "Fantasies of the Thousand Gateways",
+      "description": "Operations related to [Fantasies of the Thousand Gateways]."
+    },
+    {
+      "name": "Information",
+      "description": "Operations related to [Information]."
+    },
+    {
+      "name": "Items",
+      "description": "Operations related to [Items]."
+    },
+    {
+      "name": "Monsters",
+      "description": "Operations related to [Monsters]."
+    },
+    {
+      "name": "Namecards",
+      "description": "Operations related to [Namecards]."
+    },
+    {
+      "name": "New Content",
+      "description": "Operations related to [New Content]."
+    },
+    {
+      "name": "Phone",
+      "description": "Operations related to [Phone]."
+    },
+    {
+      "name": "Dreaming Deep",
+      "description": "Operations related to [Dreaming Deep]."
+    },
+    {
+      "name": "Stories",
+      "description": "Operations related to [Stories]."
+    },
+    {
+      "name": "Terms",
+      "description": "Operations related to [Terms]."
+    },
+    {
+      "name": "Titles",
+      "description": "Operations related to [Titles]."
+    },
+    {
+      "name": "Tower of Adversity",
+      "description": "Operations related to [Tower of Adversity]."
+    },
+    {
+      "name": "Weapons",
+      "description": "Operations related to [Weapons]."
+    },
+    {
+      "name": "Whimpering Wastes",
+      "description": "Operations related to [Whimpering Wastes]."
     }
   ],
   "paths": {
@@ -30,33 +112,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "API servers and languages list",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "apiList": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "url": {
-                              "type": "string"
-                            },
-                            "P": {
-                              "type": "integer"
-                            }
-                          }
-                        }
-                      },
-                      "language": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/ApiServerList"
                 }
               }
             }
@@ -79,28 +135,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -132,28 +167,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -162,54 +176,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "description": "List of Exploration Reports.",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "Id": {
-                        "type": "integer"
-                      },
-                      "Title": {
-                        "type": "string"
-                      },
-                      "Desc": {
-                        "type": "string"
-                      },
-                      "Icon": {
-                        "type": "string"
-                      },
-                      "Logo": {
-                        "type": "string"
-                      },
-                      "SortIndex": {
-                        "type": "integer"
-                      },
-                      "Areas": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "AreaId": {
-                              "type": "integer"
-                            },
-                            "Title": {
-                              "type": "string"
-                            },
-                            "Level": {
-                              "type": "integer"
-                            },
-                            "Father": {
-                              "type": "integer"
-                            },
-                            "SortIndex": {
-                              "type": "integer"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/ExplorationReportList"
                 }
               }
             }
@@ -232,28 +199,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -261,7 +207,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -272,34 +218,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Exploration Report details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "Title": {
-                      "type": "string"
-                    },
-                    "Desc": {
-                      "type": "string"
-                    },
-                    "Icon": {
-                      "type": "string"
-                    },
-                    "Logo": {
-                      "type": "string"
-                    },
-                    "SortIndex": {
-                      "type": "integer"
-                    },
-                    "Areas": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/ExplorationReportDetail"
                 }
               }
             }
@@ -322,28 +241,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -352,65 +250,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of playable characters.",
-                  "properties": {
-                    "roleList": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Id": {
-                            "type": "integer",
-                            "format": "int32"
-                          },
-                          "Name": {
-                            "type": "string"
-                          },
-                          "QualityId": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Rarity / quality id."
-                          },
-                          "Element": {
-                            "type": "object",
-                            "properties": {
-                              "Id": {
-                                "type": "integer",
-                                "format": "int32"
-                              },
-                              "Icon": {
-                                "type": "string",
-                                "description": "Element icon path without domain."
-                              },
-                              "Name": {
-                                "type": "string",
-                                "description": "Localized element name."
-                              }
-                            }
-                          },
-                          "RoleHeadIcon": {
-                            "type": "string"
-                          },
-                          "WeaponType": {
-                            "type": "object",
-                            "properties": {
-                              "Id": {
-                                "type": "integer",
-                                "format": "int32"
-                              },
-                              "Name": {
-                                "type": "string"
-                              },
-                              "Icon": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/CharacterList"
                 }
               }
             }
@@ -433,28 +273,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -462,7 +281,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -473,91 +292,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Character details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "Name": {
-                      "type": "string"
-                    },
-                    "QualityId": {
-                      "type": "integer"
-                    },
-                    "Element": {
-                      "type": "object"
-                    },
-                    "RoleHeadIcon": {
-                      "type": "string"
-                    },
-                    "WeaponType": {
-                      "type": "object"
-                    },
-                    "Introduction": {
-                      "type": "string"
-                    },
-                    "Skills": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "ResonantChain": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "Skins": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "Properties": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "SkillTree": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "Stories": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "Words": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "Goods": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "Breaches": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "SkillInputs": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/CharacterDetail"
                 }
               }
             }
@@ -580,28 +315,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -610,31 +324,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "description": "List of DP Matrix seasons.",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "Season": {
-                        "type": "integer"
-                      },
-                      "Name": {
-                        "type": "string"
-                      },
-                      "LevelIds": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        }
-                      },
-                      "LevelNames": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/DPMatrixSeasonList"
                 }
               }
             }
@@ -657,28 +347,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -686,7 +355,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -697,34 +366,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "DP Matrix season details.",
-                  "properties": {
-                    "Season": {
-                      "type": "integer"
-                    },
-                    "Name": {
-                      "type": "string"
-                    },
-                    "LevelIds": {
-                      "type": "array",
-                      "items": {
-                        "type": "integer"
-                      }
-                    },
-                    "Levels": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "Roles": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/DPMatrixSeasonDetail"
                 }
               }
             }
@@ -740,35 +382,14 @@
     },
     "/{lang}/echo": {
       "get": {
-        "summary": "List Echo List",
+        "summary": "List Echoes",
         "operationId": "_lang_echo",
         "tags": [
-          "Echo List"
+          "Echoes"
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -777,84 +398,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of echoes.",
-                  "properties": {
-                    "phantomsList": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Id": {
-                            "type": "integer"
-                          },
-                          "Name": {
-                            "type": "string"
-                          },
-                          "Rarity": {
-                            "type": "integer"
-                          },
-                          "Icon": {
-                            "type": "string"
-                          },
-                          "PhantomType": {
-                            "type": "integer"
-                          },
-                          "Element": {
-                            "type": "object",
-                            "properties": {
-                              "Id": {
-                                "type": "integer"
-                              },
-                              "Name": {
-                                "type": "string"
-                              },
-                              "Icon": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "FetterGroups": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "Id": {
-                                  "type": "integer"
-                                },
-                                "Name": {
-                                  "type": "string"
-                                },
-                                "Icon": {
-                                  "type": "string"
-                                },
-                                "Fetters": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "Id": {
-                                        "type": "integer"
-                                      },
-                                      "Name": {
-                                        "type": "string"
-                                      },
-                                      "Level": {
-                                        "type": "integer"
-                                      },
-                                      "EffectDescription": {
-                                        "type": "string"
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/EchoList"
                 }
               }
             }
@@ -870,35 +414,14 @@
     },
     "/{lang}/echo/{id}": {
       "get": {
-        "summary": "Get Echo List details",
+        "summary": "Get Echoes details",
         "operationId": "_lang_echo_id",
         "tags": [
-          "Echo List"
+          "Echoes"
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -906,7 +429,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -917,34 +440,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Echo details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "Name": {
-                      "type": "string"
-                    },
-                    "Rarity": {
-                      "type": "integer"
-                    },
-                    "Icon": {
-                      "type": "string"
-                    },
-                    "PhantomType": {
-                      "type": "integer"
-                    },
-                    "Element": {
-                      "type": "object"
-                    },
-                    "FetterGroups": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/EchoDetail"
                 }
               }
             }
@@ -967,28 +463,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -997,27 +472,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "description": "List of FOTG cycles.",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "Id": {
-                        "type": "integer"
-                      },
-                      "start": {
-                        "type": "string",
-                        "format": "date"
-                      },
-                      "finish": {
-                        "type": "string",
-                        "format": "date"
-                      },
-                      "current": {
-                        "type": "boolean"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/FOTGList"
                 }
               }
             }
@@ -1040,28 +495,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -1070,51 +504,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "description": "List of FOTG buff pools.",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "Id": {
-                        "type": "integer"
-                      },
-                      "BuffName": {
-                        "type": "string"
-                      },
-                      "BuffDesc": {
-                        "type": "string"
-                      },
-                      "BuffIcon": {
-                        "type": "string"
-                      },
-                      "PerIds": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        }
-                      },
-                      "BuffTagId": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "Id": {
-                              "type": "integer"
-                            },
-                            "Name": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "Color": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/FOTGBuffPoolList"
                 }
               }
             }
@@ -1137,28 +527,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -1166,7 +535,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -1177,50 +546,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "FOTG cycle details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "CycleName": {
-                      "type": "string"
-                    },
-                    "ViewBackground": {
-                      "type": "string"
-                    },
-                    "BuffDesc": {
-                      "type": "string"
-                    },
-                    "RecommendedRole": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object",
-                        "properties": {
-                          "Name": {
-                            "type": "string"
-                          },
-                          "QualityId": {
-                            "type": "integer"
-                          },
-                          "RoleHeadIcon": {
-                            "type": "string"
-                          },
-                          "Element": {
-                            "type": "object",
-                            "properties": {
-                              "Id": {
-                                "type": "integer"
-                              },
-                              "Icon": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/FOTGDetail"
                 }
               }
             }
@@ -1243,28 +569,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -1273,36 +578,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of info items.",
-                  "properties": {
-                    "infoList": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Id": {
-                            "type": "integer"
-                          },
-                          "Title": {
-                            "type": "string"
-                          },
-                          "Text": {
-                            "type": "string"
-                          },
-                          "ItemId": {
-                            "type": "integer"
-                          },
-                          "Picture": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/InfoList"
                 }
               }
             }
@@ -1325,28 +601,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -1354,7 +609,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -1365,28 +620,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Info item details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "Title": {
-                      "type": "string"
-                    },
-                    "Text": {
-                      "type": "string"
-                    },
-                    "ItemId": {
-                      "type": "integer"
-                    },
-                    "Picture": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/InfoDetail"
                 }
               }
             }
@@ -1409,28 +643,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -1439,36 +652,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of items.",
-                  "properties": {
-                    "itemList": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Id": {
-                            "type": "integer"
-                          },
-                          "Name": {
-                            "type": "string"
-                          },
-                          "Icon": {
-                            "type": "string"
-                          },
-                          "QualityId": {
-                            "type": "integer"
-                          },
-                          "TypeId": {
-                            "type": "integer"
-                          },
-                          "TypeName": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/ItemList"
                 }
               }
             }
@@ -1491,28 +675,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -1520,7 +683,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -1531,28 +694,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Item details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "Name": {
-                      "type": "string"
-                    },
-                    "Icon": {
-                      "type": "string"
-                    },
-                    "QualityId": {
-                      "type": "integer"
-                    },
-                    "TypeId": {
-                      "type": "integer"
-                    },
-                    "TypeName": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ItemDetail"
                 }
               }
             }
@@ -1575,28 +717,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -1605,36 +726,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of monsters.",
-                  "properties": {
-                    "monsterList": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Id": {
-                            "type": "integer"
-                          },
-                          "Icon": {
-                            "type": "string"
-                          },
-                          "Name": {
-                            "type": "string"
-                          },
-                          "Rarity": {
-                            "type": "string"
-                          },
-                          "RarityId": {
-                            "type": "integer"
-                          },
-                          "ModelName": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/MonsterList"
                 }
               }
             }
@@ -1657,28 +749,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -1686,7 +757,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -1697,28 +768,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Monster details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "Icon": {
-                      "type": "string"
-                    },
-                    "Name": {
-                      "type": "string"
-                    },
-                    "Rarity": {
-                      "type": "string"
-                    },
-                    "RarityId": {
-                      "type": "integer"
-                    },
-                    "ModelName": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/MonsterDetail"
                 }
               }
             }
@@ -1741,28 +791,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -1771,30 +800,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of namecards.",
-                  "properties": {
-                    "namecardList": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Id": {
-                            "type": "integer"
-                          },
-                          "CardPath": {
-                            "type": "string"
-                          },
-                          "Icon": {
-                            "type": "string"
-                          },
-                          "Name": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/NamecardList"
                 }
               }
             }
@@ -1817,28 +823,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -1846,7 +831,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -1857,22 +842,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Namecard details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "CardPath": {
-                      "type": "string"
-                    },
-                    "Icon": {
-                      "type": "string"
-                    },
-                    "Name": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/NamecardDetail"
                 }
               }
             }
@@ -1895,28 +865,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -1925,29 +874,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "description": "New content info.",
-                  "items": {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "GameVer": {
-                            "type": "string"
-                          },
-                          "ResVer": {
-                            "type": "string"
-                          },
-                          "Changelist": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      {
-                        "type": "object"
-                      }
-                    ]
-                  }
+                  "$ref": "#/components/schemas/NewContentList"
                 }
               }
             }
@@ -1970,28 +897,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -2000,31 +906,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "description": "List of WavesLine contacts.",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "Id": {
-                        "type": "integer"
-                      },
-                      "Icon": {
-                        "type": "string"
-                      },
-                      "Name": {
-                        "type": "string"
-                      },
-                      "IsGroupChat": {
-                        "type": "boolean"
-                      },
-                      "Desc": {
-                        "type": "string"
-                      },
-                      "PeopleNum": {
-                        "type": "integer"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/PhoneList"
                 }
               }
             }
@@ -2047,28 +929,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -2076,7 +937,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -2087,28 +948,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "WavesLine details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "Icon": {
-                      "type": "string"
-                    },
-                    "Name": {
-                      "type": "string"
-                    },
-                    "IsGroupChat": {
-                      "type": "boolean"
-                    },
-                    "Desc": {
-                      "type": "string"
-                    },
-                    "PeopleNum": {
-                      "type": "integer"
-                    }
-                  }
+                  "$ref": "#/components/schemas/PhoneDetail"
                 }
               }
             }
@@ -2124,35 +964,14 @@
     },
     "/{lang}/rogue": {
       "get": {
-        "summary": "List Rogue",
+        "summary": "List Dreaming Deep",
         "operationId": "_lang_rogue",
         "tags": [
-          "Rogue"
+          "Dreaming Deep"
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -2161,35 +980,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of rogue events.",
-                  "properties": {
-                    "rogueEvents": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Id": {
-                            "type": "integer"
-                          },
-                          "Event": {
-                            "type": "object",
-                            "properties": {
-                              "Id": {
-                                "type": "integer"
-                              },
-                              "Title": {
-                                "type": "string"
-                              },
-                              "Desc": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/RogueEventList"
                 }
               }
             }
@@ -2205,35 +996,14 @@
     },
     "/{lang}/rogue/{id}": {
       "get": {
-        "summary": "Get Rogue details",
+        "summary": "Get Dreaming Deep details",
         "operationId": "_lang_rogue_id",
         "tags": [
-          "Rogue"
+          "Dreaming Deep"
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -2241,7 +1011,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -2252,27 +1022,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Rogue event details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "Event": {
-                      "type": "object",
-                      "properties": {
-                        "Id": {
-                          "type": "integer"
-                        },
-                        "Title": {
-                          "type": "string"
-                        },
-                        "Desc": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/RogueEventDetail"
                 }
               }
             }
@@ -2295,28 +1045,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -2325,55 +1054,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of stories grouped by type.",
-                  "properties": {
-                    "storyTypes": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "TypeId": {
-                            "type": "string"
-                          },
-                          "TypeDescription": {
-                            "type": "string"
-                          },
-                          "Stories": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "Group": {
-                                  "type": "string"
-                                },
-                                "Stories": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "Id": {
-                                        "type": "integer"
-                                      },
-                                      "Name": {
-                                        "type": "string"
-                                      },
-                                      "Description": {
-                                        "type": "string"
-                                      },
-                                      "QuestId": {
-                                        "type": "integer"
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/StoryList"
                 }
               }
             }
@@ -2396,28 +1077,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -2425,7 +1085,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -2436,56 +1096,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Story details including dialogue.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "Name": {
-                      "type": "string"
-                    },
-                    "Description": {
-                      "type": "string"
-                    },
-                    "Type": {
-                      "type": "string"
-                    },
-                    "Chapters": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Title": {
-                            "type": "string"
-                          },
-                          "Dialogues": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "Id": {
-                                  "type": "integer"
-                                },
-                                "Speaker": {
-                                  "type": "string"
-                                },
-                                "PlotLineKey": {
-                                  "type": "string"
-                                },
-                                "Options": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/StoryDetail"
                 }
               }
             }
@@ -2508,28 +1119,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -2538,25 +1128,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "description": "List of terms.",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "Id": {
-                        "type": "integer"
-                      },
-                      "TermName": {
-                        "type": "string"
-                      },
-                      "TermTitle": {
-                        "type": "string"
-                      },
-                      "TermDesc": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/TermList"
                 }
               }
             }
@@ -2579,28 +1151,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -2608,7 +1159,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -2619,22 +1170,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Term details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "TermName": {
-                      "type": "string"
-                    },
-                    "TermTitle": {
-                      "type": "string"
-                    },
-                    "TermDesc": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/TermDetail"
                 }
               }
             }
@@ -2657,28 +1193,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -2687,27 +1202,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of player titles.",
-                  "properties": {
-                    "titleList": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Id": {
-                            "type": "integer"
-                          },
-                          "TitleName": {
-                            "type": "string"
-                          },
-                          "Image": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/TitleList"
                 }
               }
             }
@@ -2730,28 +1225,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -2759,7 +1233,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -2770,19 +1244,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Title details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer"
-                    },
-                    "TitleName": {
-                      "type": "string"
-                    },
-                    "Image": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/TitleDetail"
                 }
               }
             }
@@ -2805,28 +1267,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -2835,38 +1276,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of TOA seasons.",
-                  "properties": {
-                    "seasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "areas": {
-                            "type": "integer"
-                          },
-                          "start": {
-                            "type": "string",
-                            "format": "date"
-                          },
-                          "finish": {
-                            "type": "string",
-                            "format": "date"
-                          },
-                          "current": {
-                            "type": "boolean"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/TOASeasonList"
                 }
               }
             }
@@ -2889,38 +1299,10 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
-            "name": "seasonId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Numeric seasonId identifier."
+            "$ref": "#/components/parameters/seasonId"
           }
         ],
         "responses": {
@@ -2929,40 +1311,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "TOA season details (Area -> Floor -> Cost -> Towers).",
-                  "additionalProperties": {
-                    "type": "object",
-                    "additionalProperties": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "object",
-                        "additionalProperties": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "integer"
-                              },
-                              "difficulty": {
-                                "type": "integer"
-                              },
-                              "areaName": {
-                                "type": "string"
-                              },
-                              "monsters": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/TOASeasonDetail"
                 }
               }
             }
@@ -2985,28 +1334,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -3015,58 +1343,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "List of weapons.",
-                  "properties": {
-                    "weapons": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "Id": {
-                            "type": "integer",
-                            "format": "int32"
-                          },
-                          "Name": {
-                            "type": "string"
-                          },
-                          "Icon": {
-                            "type": "string",
-                            "description": "Full URL to weapon icon."
-                          },
-                          "Type": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Numeric weapon type id."
-                          },
-                          "QualityId": {
-                            "type": "integer",
-                            "format": "int32"
-                          },
-                          "TypeName": {
-                            "type": "string",
-                            "description": "Localized weapon type name."
-                          },
-                          "TypeIcon": {
-                            "type": "string",
-                            "description": "Weapon type icon path without domain."
-                          }
-                        },
-                        "required": [
-                          "Id",
-                          "Name",
-                          "Icon",
-                          "Type",
-                          "QualityId",
-                          "TypeName",
-                          "TypeIcon"
-                        ]
-                      }
-                    }
-                  },
-                  "required": [
-                    "weapons"
-                  ]
+                  "$ref": "#/components/schemas/WeaponList"
                 }
               }
             }
@@ -3089,28 +1366,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
             "name": "id",
@@ -3118,7 +1374,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int64"
             },
             "description": "Numeric id identifier."
           }
@@ -3129,34 +1385,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Weapon details.",
-                  "properties": {
-                    "Id": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "Name": {
-                      "type": "string"
-                    },
-                    "Icon": {
-                      "type": "string"
-                    },
-                    "Type": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "QualityId": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "TypeName": {
-                      "type": "string"
-                    },
-                    "TypeIcon": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/WeaponDetail"
                 }
               }
             }
@@ -3179,28 +1408,7 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           }
         ],
         "responses": {
@@ -3209,30 +1417,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "description": "List of Whimpering Wastes seasons.",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "Season": {
-                        "type": "integer"
-                      },
-                      "Name": {
-                        "type": "string"
-                      },
-                      "start": {
-                        "type": "string",
-                        "format": "date"
-                      },
-                      "finish": {
-                        "type": "string",
-                        "format": "date"
-                      },
-                      "current": {
-                        "type": "boolean"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/WhiwaSeasonList"
                 }
               }
             }
@@ -3255,38 +1440,10 @@
         ],
         "parameters": [
           {
-            "name": "lang",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-Hans",
-                "zh-Hant",
-                "ja",
-                "ko",
-                "de",
-                "es",
-                "fr",
-                "id",
-                "pt",
-                "ru",
-                "th",
-                "vi"
-              ]
-            },
-            "description": "Language code (e.g. en, ja, zh-Hans)."
+            "$ref": "#/components/parameters/lang"
           },
           {
-            "name": "seasonId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Numeric seasonId identifier."
+            "$ref": "#/components/parameters/seasonId"
           }
         ],
         "responses": {
@@ -3295,34 +1452,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Whimpering Wastes season details.",
-                  "properties": {
-                    "Season": {
-                      "type": "integer"
-                    },
-                    "Name": {
-                      "type": "string"
-                    },
-                    "StageGroups": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "Levels": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "BuffItems": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/WhiwaSeasonDetail"
                 }
               }
             }
@@ -3334,6 +1464,1315 @@
             "description": "Not Found"
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiServerList": {
+        "type": "object",
+        "description": "API servers and languages list",
+        "properties": {
+          "apiList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "P": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "language": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ExplorationReportList": {
+        "type": "array",
+        "description": "List of Exploration Reports.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "integer"
+            },
+            "Title": {
+              "type": "string"
+            },
+            "Desc": {
+              "type": "string"
+            },
+            "Icon": {
+              "type": "string"
+            },
+            "Logo": {
+              "type": "string"
+            },
+            "SortIndex": {
+              "type": "integer"
+            },
+            "Areas": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "AreaId": {
+                    "type": "integer"
+                  },
+                  "Title": {
+                    "type": "string"
+                  },
+                  "Level": {
+                    "type": "integer"
+                  },
+                  "Father": {
+                    "type": "integer"
+                  },
+                  "SortIndex": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ExplorationReportDetail": {
+        "type": "object",
+        "description": "Exploration Report details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Desc": {
+            "type": "string"
+          },
+          "Icon": {
+            "type": "string"
+          },
+          "Logo": {
+            "type": "string"
+          },
+          "SortIndex": {
+            "type": "integer"
+          },
+          "Areas": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "CharacterList": {
+        "type": "object",
+        "description": "List of playable characters.",
+        "properties": {
+          "roleList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Id": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "QualityId": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Rarity / quality id."
+                },
+                "Element": {
+                  "type": "object",
+                  "properties": {
+                    "Id": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "Icon": {
+                      "type": "string",
+                      "description": "Element icon path without domain."
+                    },
+                    "Name": {
+                      "type": "string",
+                      "description": "Localized element name."
+                    }
+                  }
+                },
+                "RoleHeadIcon": {
+                  "type": "string"
+                },
+                "WeaponType": {
+                  "type": "object",
+                  "properties": {
+                    "Id": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Icon": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CharacterDetail": {
+        "type": "object",
+        "description": "Character details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "QualityId": {
+            "type": "integer"
+          },
+          "Element": {
+            "type": "object"
+          },
+          "RoleHeadIcon": {
+            "type": "string"
+          },
+          "WeaponType": {
+            "type": "object"
+          },
+          "Introduction": {
+            "type": "string"
+          },
+          "Skills": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "ResonantChain": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "Skins": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "Properties": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "SkillTree": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "Stories": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "Words": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "Goods": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "Breaches": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "SkillInputs": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "DPMatrixSeasonList": {
+        "type": "array",
+        "description": "List of DP Matrix seasons.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "Season": {
+              "type": "integer"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "LevelIds": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "LevelNames": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "DPMatrixSeasonDetail": {
+        "type": "object",
+        "description": "DP Matrix season details.",
+        "properties": {
+          "Season": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "LevelIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "Levels": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "Roles": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "EchoList": {
+        "type": "object",
+        "description": "List of echoes.",
+        "properties": {
+          "phantomsList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Id": {
+                  "type": "integer"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Rarity": {
+                  "type": "integer"
+                },
+                "Icon": {
+                  "type": "string"
+                },
+                "PhantomType": {
+                  "type": "integer"
+                },
+                "Element": {
+                  "type": "object",
+                  "properties": {
+                    "Id": {
+                      "type": "integer"
+                    },
+                    "Name": {
+                      "type": "string"
+                    },
+                    "Icon": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "FetterGroups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Id": {
+                        "type": "integer"
+                      },
+                      "Name": {
+                        "type": "string"
+                      },
+                      "Icon": {
+                        "type": "string"
+                      },
+                      "Fetters": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "Id": {
+                              "type": "integer"
+                            },
+                            "Name": {
+                              "type": "string"
+                            },
+                            "Level": {
+                              "type": "integer"
+                            },
+                            "EffectDescription": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "EchoDetail": {
+        "type": "object",
+        "description": "Echo details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Rarity": {
+            "type": "integer"
+          },
+          "Icon": {
+            "type": "string"
+          },
+          "PhantomType": {
+            "type": "integer"
+          },
+          "Element": {
+            "type": "object"
+          },
+          "FetterGroups": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "FOTGList": {
+        "type": "array",
+        "description": "List of FOTG cycles.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "integer"
+            },
+            "start": {
+              "type": "string",
+              "format": "date"
+            },
+            "finish": {
+              "type": "string",
+              "format": "date"
+            },
+            "current": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "FOTGBuffPoolList": {
+        "type": "array",
+        "description": "List of FOTG buff pools.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "integer"
+            },
+            "BuffName": {
+              "type": "string"
+            },
+            "BuffDesc": {
+              "type": "string"
+            },
+            "BuffIcon": {
+              "type": "string"
+            },
+            "PerIds": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "BuffTagId": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer"
+                  },
+                  "Name": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Color": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "FOTGDetail": {
+        "type": "object",
+        "description": "FOTG cycle details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "CycleName": {
+            "type": "string"
+          },
+          "ViewBackground": {
+            "type": "string"
+          },
+          "BuffDesc": {
+            "type": "string"
+          },
+          "RecommendedRole": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "type": "string"
+                },
+                "QualityId": {
+                  "type": "integer"
+                },
+                "RoleHeadIcon": {
+                  "type": "string"
+                },
+                "Element": {
+                  "type": "object",
+                  "properties": {
+                    "Id": {
+                      "type": "integer"
+                    },
+                    "Icon": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "InfoDetail": {
+        "type": "object",
+        "description": "Info item details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Text": {
+            "type": "string"
+          },
+          "ItemId": {
+            "type": "integer"
+          },
+          "Picture": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "InfoList": {
+        "type": "object",
+        "description": "List of info items.",
+        "properties": {
+          "infoList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Id": {
+                  "type": "integer"
+                },
+                "Title": {
+                  "type": "string"
+                },
+                "Text": {
+                  "type": "string"
+                },
+                "ItemId": {
+                  "type": "integer"
+                },
+                "Picture": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ItemDetail": {
+        "type": "object",
+        "description": "Item details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Icon": {
+            "type": "string"
+          },
+          "QualityId": {
+            "type": "integer"
+          },
+          "TypeId": {
+            "type": "integer"
+          },
+          "TypeName": {
+            "type": "string"
+          }
+        }
+      },
+      "ItemList": {
+        "type": "object",
+        "description": "List of items.",
+        "properties": {
+          "itemList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Id": {
+                  "type": "integer"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Icon": {
+                  "type": "string"
+                },
+                "QualityId": {
+                  "type": "integer"
+                },
+                "TypeId": {
+                  "type": "integer"
+                },
+                "TypeName": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "MonsterDetail": {
+        "type": "object",
+        "description": "Monster details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Icon": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Rarity": {
+            "type": "string"
+          },
+          "RarityId": {
+            "type": "integer"
+          },
+          "ModelName": {
+            "type": "string"
+          }
+        }
+      },
+      "MonsterList": {
+        "type": "object",
+        "description": "List of monsters.",
+        "properties": {
+          "monsterList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Id": {
+                  "type": "integer"
+                },
+                "Icon": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Rarity": {
+                  "type": "string"
+                },
+                "RarityId": {
+                  "type": "integer"
+                },
+                "ModelName": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NamecardDetail": {
+        "type": "object",
+        "description": "Namecard details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "CardPath": {
+            "type": "string"
+          },
+          "Icon": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          }
+        }
+      },
+      "NamecardList": {
+        "type": "object",
+        "description": "List of namecards.",
+        "properties": {
+          "namecardList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Id": {
+                  "type": "integer"
+                },
+                "CardPath": {
+                  "type": "string"
+                },
+                "Icon": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NewContentList": {
+        "type": "array",
+        "description": "New content info.",
+        "items": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "GameVer": {
+                  "type": "string"
+                },
+                "ResVer": {
+                  "type": "string"
+                },
+                "Changelist": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "PhoneDetail": {
+        "type": "object",
+        "description": "WavesLine details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Icon": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "IsGroupChat": {
+            "type": "boolean"
+          },
+          "Desc": {
+            "type": "string"
+          },
+          "PeopleNum": {
+            "type": "integer"
+          }
+        }
+      },
+      "PhoneList": {
+        "type": "array",
+        "description": "List of WavesLine contacts.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "integer"
+            },
+            "Icon": {
+              "type": "string"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "IsGroupChat": {
+              "type": "boolean"
+            },
+            "Desc": {
+              "type": "string"
+            },
+            "PeopleNum": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "RogueEventDetail": {
+        "type": "object",
+        "description": "Rogue event details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Event": {
+            "type": "object",
+            "properties": {
+              "Id": {
+                "type": "integer"
+              },
+              "Title": {
+                "type": "string"
+              },
+              "Desc": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "RogueEventList": {
+        "type": "object",
+        "description": "List of rogue events.",
+        "properties": {
+          "rogueEvents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Id": {
+                  "type": "integer"
+                },
+                "Event": {
+                  "type": "object",
+                  "properties": {
+                    "Id": {
+                      "type": "integer"
+                    },
+                    "Title": {
+                      "type": "string"
+                    },
+                    "Desc": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "StoryDetail": {
+        "type": "object",
+        "description": "Story details including dialogue.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Chapters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Title": {
+                  "type": "string"
+                },
+                "Dialogues": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Id": {
+                        "type": "integer"
+                      },
+                      "Speaker": {
+                        "type": "string"
+                      },
+                      "PlotLineKey": {
+                        "type": "string"
+                      },
+                      "Options": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "StoryList": {
+        "type": "object",
+        "description": "List of stories grouped by type.",
+        "properties": {
+          "storyTypes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "TypeId": {
+                  "type": "string"
+                },
+                "TypeDescription": {
+                  "type": "string"
+                },
+                "Stories": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Group": {
+                        "type": "string"
+                      },
+                      "Stories": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "Id": {
+                              "type": "integer"
+                            },
+                            "Name": {
+                              "type": "string"
+                            },
+                            "Description": {
+                              "type": "string"
+                            },
+                            "QuestId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "TermDetail": {
+        "type": "object",
+        "description": "Term details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "TermName": {
+            "type": "string"
+          },
+          "TermTitle": {
+            "type": "string"
+          },
+          "TermDesc": {
+            "type": "string"
+          }
+        }
+      },
+      "TermList": {
+        "type": "array",
+        "description": "List of terms.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "integer"
+            },
+            "TermName": {
+              "type": "string"
+            },
+            "TermTitle": {
+              "type": "string"
+            },
+            "TermDesc": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TitleDetail": {
+        "type": "object",
+        "description": "Title details.",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "TitleName": {
+            "type": "string"
+          },
+          "Image": {
+            "type": "string"
+          }
+        }
+      },
+      "TitleList": {
+        "type": "object",
+        "description": "List of player titles.",
+        "properties": {
+          "titleList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Id": {
+                  "type": "integer"
+                },
+                "TitleName": {
+                  "type": "string"
+                },
+                "Image": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TOASeasonList": {
+        "type": "object",
+        "description": "List of TOA seasons.",
+        "properties": {
+          "seasons": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "areas": {
+                  "type": "integer"
+                },
+                "start": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "finish": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "current": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TOASeasonDetail": {
+        "type": "object",
+        "description": "TOA season details (Area -> Floor -> Cost -> Towers).",
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "difficulty": {
+                      "type": "integer"
+                    },
+                    "areaName": {
+                      "type": "string"
+                    },
+                    "monsters": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "WeaponDetail": {
+        "type": "object",
+        "description": "Weapon details.",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Icon": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "QualityId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TypeName": {
+            "type": "string"
+          },
+          "TypeIcon": {
+            "type": "string"
+          }
+        }
+      },
+      "WeaponList": {
+        "type": "object",
+        "description": "List of weapons.",
+        "properties": {
+          "weapons": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Id": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Icon": {
+                  "type": "string",
+                  "description": "Full URL to weapon icon."
+                },
+                "Type": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Numeric weapon type id."
+                },
+                "QualityId": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "TypeName": {
+                  "type": "string",
+                  "description": "Localized weapon type name."
+                },
+                "TypeIcon": {
+                  "type": "string",
+                  "description": "Weapon type icon path without domain."
+                }
+              },
+              "required": [
+                "Id",
+                "Name",
+                "Icon",
+                "Type",
+                "QualityId",
+                "TypeName",
+                "TypeIcon"
+              ]
+            }
+          }
+        },
+        "required": [
+          "weapons"
+        ]
+      },
+      "WhiwaSeasonList": {
+        "type": "array",
+        "description": "List of Whimpering Wastes seasons.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "Season": {
+              "type": "integer"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "start": {
+              "type": "string",
+              "format": "date"
+            },
+            "finish": {
+              "type": "string",
+              "format": "date"
+            },
+            "current": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "WhiwaSeasonDetail": {
+        "type": "object",
+        "description": "Whimpering Wastes season details.",
+        "properties": {
+          "Season": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "StageGroups": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "Levels": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "BuffItems": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "lang": {
+        "name": "lang",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "en",
+            "zh-Hans",
+            "zh-Hant",
+            "ja",
+            "ko",
+            "de",
+            "es",
+            "fr",
+            "id",
+            "pt",
+            "ru",
+            "th",
+            "vi"
+          ]
+        },
+        "description": "Language code (e.g. en, ja, zh-Hans)."
+      },
+      "seasonId": {
+        "name": "seasonId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "description": "Season identifier."
       }
     }
   }
